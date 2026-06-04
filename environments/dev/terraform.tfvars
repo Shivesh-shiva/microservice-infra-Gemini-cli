@@ -23,12 +23,12 @@ clusters = {
     resource_group_name = "rg-microservices-dev"
     location            = "East US"
     dns_prefix          = "aksdev"
-    kubernetes_version  = "1.27"
+    kubernetes_version  = "1.35"
     
     default_node_pool = {
       name                = "systempool"
       node_count          = 1
-      vm_size             = "Standard_DS2_v2"
+      vm_size             = "Standard_D2s_v3"
       enable_auto_scaling = false
     }
 
