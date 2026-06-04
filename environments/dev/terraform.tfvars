@@ -24,7 +24,7 @@ clusters = {
     location            = "East US"
     dns_prefix          = "aksdev"
     kubernetes_version  = "1.35"
-    
+
     default_node_pool = {
       name                = "systempool"
       node_count          = 1
@@ -39,7 +39,7 @@ clusters = {
     identity = {
       type = "SystemAssigned"
     }
-    
+
     tags = {
       environment = "development"
     }

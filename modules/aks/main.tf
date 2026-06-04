@@ -30,11 +30,11 @@ resource "azurerm_kubernetes_cluster" "this" {
   dynamic "network_profile" {
     for_each = each.value.network_profile != null ? [each.value.network_profile] : []
     content {
-      network_plugin    = network_profile.value.network_plugin
-      network_policy    = network_profile.value.network_policy
-      load_balancer_sku = network_profile.value.load_balancer_sku
-      service_cidr      = network_profile.value.service_cidr
-      dns_service_ip    = network_profile.value.dns_service_ip
+      network_plugin     = network_profile.value.network_plugin
+      network_policy     = network_profile.value.network_policy
+      load_balancer_sku  = network_profile.value.load_balancer_sku
+      service_cidr       = network_profile.value.service_cidr
+      dns_service_ip     = network_profile.value.dns_service_ip
       docker_bridge_cidr = network_profile.value.docker_bridge_cidr
     }
   }

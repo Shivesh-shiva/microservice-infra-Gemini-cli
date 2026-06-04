@@ -7,7 +7,7 @@ variable "clusters" {
     kubernetes_version  = optional(string)
     sku_tier            = optional(string, "Free")
     tags                = optional(map(string), {})
-    
+
     default_node_pool = object({
       name                = string
       node_count          = optional(number, 1)
@@ -30,11 +30,11 @@ variable "clusters" {
     })), {})
 
     network_profile = optional(object({
-      network_plugin    = optional(string, "kubenet")
-      network_policy    = optional(string)
-      load_balancer_sku = optional(string, "standard")
-      service_cidr      = optional(string)
-      dns_service_ip    = optional(string)
+      network_plugin     = optional(string, "kubenet")
+      network_policy     = optional(string)
+      load_balancer_sku  = optional(string, "standard")
+      service_cidr       = optional(string)
+      dns_service_ip     = optional(string)
       docker_bridge_cidr = optional(string)
     }))
 

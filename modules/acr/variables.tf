@@ -7,10 +7,10 @@ variable "registries" {
     admin_enabled       = optional(bool, false)
     tags                = optional(map(string), {})
     georeplications = optional(list(object({
-      location                = string
+      location                  = string
       regional_endpoint_enabled = optional(bool, false)
-      zone_redundancy_enabled = optional(bool, false)
-      tags                    = optional(map(string), {})
+      zone_redundancy_enabled   = optional(bool, false)
+      tags                      = optional(map(string), {})
     })), [])
     network_rule_set = optional(object({
       default_action = optional(string, "Allow")
