@@ -1,0 +1,26 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude sensitive variables files
+*.tfvars
+*.tfvars.json
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files for specific environments if needed
+# !example_override.tf
+
+# Include microservice_infra/environments/dev/terraform.tfvars if user wants, 
+# but generally .tfvars should be ignored.
