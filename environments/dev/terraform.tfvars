@@ -4,6 +4,7 @@ resource_groups = {
     tags = {
       environment = "development"
       project     = "microservices"
+      managed_by  = "gemini-cli-pipeline"
     }
   }
 }
