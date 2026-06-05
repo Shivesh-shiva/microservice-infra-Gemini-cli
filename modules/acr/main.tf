@@ -1,4 +1,5 @@
 resource "azurerm_container_registry" "this" {
+  # Azure Container Registry resource managed by the module
   for_each = var.registries
 
   name                = each.key
