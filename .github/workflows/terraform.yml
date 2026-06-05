@@ -59,10 +59,16 @@ jobs:
           tflint --init
           tflint -f compact
 
-      - name: Run TFSec
-        uses: aquasecurity/tfsec-action@v1.0.0
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          working_directory: ${{ env.WORKING_DIRECTORY }}
+          scan-type: 'config'
+          hide-progress: true
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+          directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: Terraform Plan
         id: plan
