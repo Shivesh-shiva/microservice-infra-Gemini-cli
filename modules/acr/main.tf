@@ -1,12 +1,31 @@
 resource "azurerm_container_registry" "this" {
   for_each = var.registries
 
-  name                = each.key
-  resource_group_name = each.value.resource_group_name
-  location            = each.value.location
-  sku                 = each.value.sku
-  admin_enabled       = each.value.admin_enabled
-  tags                = each.value.tags
+  name                          = each.key
+  resource_group_name           = each.value.resource_group_name
+  location                      = each.value.location
+  sku                           = each.value.sku
+  admin_enabled                 = each.value.admin_enabled
+  public_network_access_enabled = each.value.public_network_access_enabled
+  data_endpoint_enabled         = each.value.data_endpoint_enabled
+  quarantine_policy_enabled     = each.value.quarantine_policy_enabled
+  tags                          = each.value.tags
+
+  dynamic "retention_policy" {
+    for_each = each.value.retention_policy != null ? [each.value.retention_policy] : []
+    content {
+      days    = retention_policy.value.days
+      enabled = retention_policy.value.enabled
+    }
+  }
+
+  dynamic "trust_policy" {
+    for_each = each.value.trust_policy != null ? [each.value.trust_policy] : []
+    content {
+      enabled = trust_policy.value.enabled
+    }
+  }
+
 
   dynamic "georeplications" {
     for_each = each.value.georeplications
