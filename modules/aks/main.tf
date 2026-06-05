@@ -1,24 +1,47 @@
 resource "azurerm_kubernetes_cluster" "this" {
   for_each = var.clusters
 
-  name                = each.key
-  location            = each.value.location
-  resource_group_name = each.value.resource_group_name
-  dns_prefix          = each.value.dns_prefix
-  kubernetes_version  = each.value.kubernetes_version
-  sku_tier            = each.value.sku_tier
-  tags                = each.value.tags
+  name                            = each.key
+  location                        = each.value.location
+  resource_group_name             = each.value.resource_group_name
+  dns_prefix                      = each.value.dns_prefix
+  kubernetes_version              = each.value.kubernetes_version
+  sku_tier                        = each.value.sku_tier
+  api_server_authorized_ip_ranges = each.value.api_server_authorized_ip_ranges
+  private_cluster_enabled         = each.value.private_cluster_enabled
+  azure_policy_enabled            = each.value.azure_policy_enabled
+  local_account_disabled          = each.value.local_account_disabled
+  automatic_channel_upgrade       = each.value.automatic_channel_upgrade
+  tags                            = each.value.tags
 
   default_node_pool {
-    name                = each.value.default_node_pool.name
-    node_count          = each.value.default_node_pool.node_count
-    vm_size             = each.value.default_node_pool.vm_size
-    enable_auto_scaling = each.value.default_node_pool.enable_auto_scaling
-    min_count           = each.value.default_node_pool.min_count
-    max_count           = each.value.default_node_pool.max_count
-    type                = each.value.default_node_pool.type
-    vnet_subnet_id      = each.value.default_node_pool.vnet_subnet_id
+    name                   = each.value.default_node_pool.name
+    node_count             = each.value.default_node_pool.node_count
+    vm_size                = each.value.default_node_pool.vm_size
+    enable_auto_scaling    = each.value.default_node_pool.enable_auto_scaling
+    min_count              = each.value.default_node_pool.min_count
+    max_count              = each.value.default_node_pool.max_count
+    type                   = each.value.default_node_pool.type
+    vnet_subnet_id         = each.value.default_node_pool.vnet_subnet_id
+    max_pods               = each.value.default_node_pool.max_pods
+    os_disk_type           = each.value.default_node_pool.os_disk_type
+    enable_host_encryption = each.value.default_node_pool.enable_host_encryption
   }
+
+  dynamic "oms_agent" {
+    for_each = each.value.oms_agent != null ? [each.value.oms_agent] : []
+    content {
+      log_analytics_workspace_id = oms_agent.value.log_analytics_workspace_id
+    }
+  }
+
+  dynamic "key_vault_secrets_provider" {
+    for_each = each.value.key_vault_secrets_provider != null ? [each.value.key_vault_secrets_provider] : []
+    content {
+      secret_rotation_enabled = key_vault_secrets_provider.value.secret_rotation_enabled
+    }
+  }
+
 
   dynamic "identity" {
     for_each = each.value.identity != null ? [each.value.identity] : []
@@ -75,6 +98,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   enable_auto_scaling   = each.value.config.enable_auto_scaling
   min_count             = each.value.config.min_count
   max_count             = each.value.config.max_count
-  vnet_subnet_id        = each.value.config.vnet_subnet_id
-  mode                  = each.value.config.mode
+  vnet_subnet_id         = each.value.config.vnet_subnet_id
+  mode                   = each.value.config.mode
+  max_pods               = each.value.config.max_pods
+  os_disk_type           = each.value.config.os_disk_type
+  enable_host_encryption = each.value.config.enable_host_encryption
 }
