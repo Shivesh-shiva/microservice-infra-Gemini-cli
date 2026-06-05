@@ -20,7 +20,7 @@ clusters = {
     location            = "East US"
     resource_group_name = "rg-microservice-dev"
     dns_prefix          = "microdev"
-    
+
     default_node_pool = {
       name       = "system"
       node_count = 1
