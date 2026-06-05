@@ -22,11 +22,11 @@ variable "registries" {
     }))
     retention_policy = optional(object({
       days    = optional(number, 7)
-      enabled = optional(bool, true)
-    }), { days = 7, enabled = true })
+      enabled = optional(bool, false)
+    }), { days = 7, enabled = false })
     trust_policy = optional(object({
-      enabled = optional(bool, true)
-    }), { enabled = true })
+      enabled = optional(bool, false)
+    }), { enabled = false })
     data_endpoint_enabled = optional(bool, true)
     quarantine_policy_enabled = optional(bool, false)
 
