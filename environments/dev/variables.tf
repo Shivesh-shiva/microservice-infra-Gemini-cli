@@ -1,4 +1,5 @@
 variable "resource_groups" {
+  # Map of resource groups to be managed by the module
   description = "A map of resource groups to create"
   type = map(object({
     location = string
