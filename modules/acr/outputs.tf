@@ -1,0 +1,7 @@
+output "registry_ids" {
+  value = { for k, v in azurerm_container_registry.this : k => v.id }
+}
+
+output "registry_login_servers" {
+  value = { for k, v in azurerm_container_registry.this : k => v.login_server }
+}
