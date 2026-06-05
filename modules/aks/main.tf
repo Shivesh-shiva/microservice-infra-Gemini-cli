@@ -7,7 +7,9 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                      = each.value.dns_prefix
   kubernetes_version              = each.value.kubernetes_version
   sku_tier                        = each.value.sku_tier
-  api_server_authorized_ip_ranges = each.value.api_server_authorized_ip_ranges
+  api_server_access_profile {
+    authorized_ip_ranges = each.value.api_server_authorized_ip_ranges
+  }
   private_cluster_enabled         = each.value.private_cluster_enabled
   azure_policy_enabled            = each.value.azure_policy_enabled
   local_account_disabled          = each.value.local_account_disabled

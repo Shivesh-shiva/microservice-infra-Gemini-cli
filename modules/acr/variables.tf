@@ -28,7 +28,7 @@ variable "registries" {
       enabled = optional(bool, true)
     }), { enabled = true })
     data_endpoint_enabled = optional(bool, true)
-    quarantine_policy_enabled = optional(bool, true)
+    quarantine_policy_enabled = optional(bool, false)
 
   }))
 }
