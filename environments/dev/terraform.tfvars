@@ -24,12 +24,12 @@ clusters = {
     default_node_pool = {
       name       = "system"
       node_count = 1
-      vm_size    = "Standard_DS2_v2"
+      vm_size    = "Standard_B2s"
     }
 
     additional_node_pools = {
       "apppool" = {
-        vm_size    = "Standard_DS2_v2"
+        vm_size    = "Standard_B2s"
         node_count = 1
       }
     }
