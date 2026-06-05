@@ -27,7 +27,7 @@ variable "registries" {
     trust_policy = optional(object({
       enabled = optional(bool, false)
     }), { enabled = false })
-    data_endpoint_enabled = optional(bool, true)
+    data_endpoint_enabled = optional(bool, false)
     quarantine_policy_enabled = optional(bool, false)
 
   }))
