@@ -80,10 +80,12 @@ jobs:
 
       - name: Post Infracost Comment
         if: github.event_name == 'pull_request'
-        uses: infracost/actions/comment@v2
-        with:
-          path: /tmp/infracost.json
-          behavior: update
+        run: |
+          infracost comment github --path /tmp/infracost.json \
+                                   --repo $GITHUB_REPOSITORY \
+                                   --github-token ${{ github.token }} \
+                                   --pull-request ${{ github.event.pull_request.number }} \
+                                   --behavior update
 
   terraform-cd:
     name: 'Terraform CD'
