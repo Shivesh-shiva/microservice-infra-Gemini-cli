@@ -21,8 +21,8 @@ resource "azurerm_kubernetes_cluster" "this" {
     node_count             = each.value.default_node_pool.node_count
     vm_size                = each.value.default_node_pool.vm_size
     enable_auto_scaling    = each.value.default_node_pool.enable_auto_scaling
-    min_count              = each.value.default_node_pool.min_count
-    max_count              = each.value.default_node_pool.max_count
+    min_count              = each.value.default_node_pool.enable_auto_scaling ? each.value.default_node_pool.min_count : null
+    max_count              = each.value.default_node_pool.enable_auto_scaling ? each.value.default_node_pool.max_count : null
     type                   = each.value.default_node_pool.type
     vnet_subnet_id         = each.value.default_node_pool.vnet_subnet_id
     max_pods               = each.value.default_node_pool.max_pods
@@ -98,8 +98,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   vm_size               = each.value.config.vm_size
   node_count            = each.value.config.node_count
   enable_auto_scaling   = each.value.config.enable_auto_scaling
-  min_count             = each.value.config.min_count
-  max_count             = each.value.config.max_count
+  min_count             = each.value.config.enable_auto_scaling ? each.value.config.min_count : null
+  max_count             = each.value.config.enable_auto_scaling ? each.value.config.max_count : null
   vnet_subnet_id         = each.value.config.vnet_subnet_id
   mode                   = each.value.config.mode
   max_pods               = each.value.config.max_pods

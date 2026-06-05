@@ -5,7 +5,7 @@ variable "registries" {
     location            = string
     sku                           = optional(string, "Premium")
     admin_enabled                 = optional(bool, false)
-    public_network_access_enabled = optional(bool, false)
+    public_network_access_enabled = optional(bool, true)
     tags                          = optional(map(string), {})
     georeplications = optional(list(object({
       location                  = string
